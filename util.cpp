@@ -13,18 +13,32 @@ std::string convToLower(std::string src)
 
 /** Complete the code to convert a string containing a rawWord
     to a set of words based on the criteria given in the assignment **/
-std::set<std::string> parseStringToWords(string rawWords)
+std::set<std::string> parseStringToWords(string rawWords)// possible error here
 {
+  set<std::string> temp;
+	//int count = 0;
+  while (!rawWords.empty()) {
+		rawWords = trim(rawWords);
+    for (unsigned int i = 0; i < rawWords.size(); i++) {
+      if (rawWords[i] < 65 || (rawWords[i] > 90 && rawWords[i] < 97) || rawWords[i]>122|| i == rawWords.size()-1) {
+        string temp1;
+				if(i == rawWords.size()-1){
+					temp1  = rawWords.substr(0);
+				}
+				else{
+					temp1 = rawWords.substr(0, i);
+				}
+        if(temp1.size()>=2){
+					temp.insert(temp1);
+				}
+				rawWords = rawWords.substr(i+1,rawWords.size()); 
+				break;
+      }
 
-
-
-
-
-
-
-
-
-
+    }
+  }
+  return temp;
+   
 }
 
 /**************************************************
@@ -55,3 +69,14 @@ std::string &rtrim(std::string &s) {
 std::string &trim(std::string &s) {
     return ltrim(rtrim(s));
 }
+
+// int main() {
+
+//     string s = "Data Abstraction & Problem Solving with C++";
+//     std::set<std::string>temp = parseStringToWords(s);
+//     std::set<string>::iterator it;
+//     for(it = temp.begin();it!=temp.end();++it){
+//         std::cout<<*it<<endl;
+//     }
+//     return 0;
+// }
